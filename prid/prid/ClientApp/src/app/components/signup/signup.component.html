@@ -1,0 +1,57 @@
+<form id="frm" class="form" [formGroup]="frm" novalidate>
+    <h1 class="header">Signup</h1>
+    <div class="form">
+        <mat-form-field>
+            <input matInput placeholder="Pseudo" [formControl]="ctlPseudo" required>
+            <mat-error class="field-error" *ngIf="ctlPseudo.hasError('required')">Required</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPseudo.hasError('minlength')">Minimum length is {{ctlPseudo.errors['minlength'].requiredLength}}</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPseudo.hasError('maxlength')">Maximum length is {{ctlPseudo.errors['maxlength'].requiredLength}}</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPseudo.hasError('pseudoUsed')">Pseudo already in use</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPseudo.hasError('forbiddenValue')">Forbidden character</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="First Name" [formControl]="ctlFirstName">
+            <mat-error class="field-error" *ngIf="ctlFirstName.hasError('minlength')">Minimum length is {{ctlFirstName.errors['minlength'].requiredLength}}</mat-error>
+            <mat-error class="field-error" *ngIf="ctlFirstName.hasError('maxlength')">Maximum length is {{ctlFirstName.errors['maxlength'].requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Last Name" [formControl]="ctlLastName">
+            <mat-error class="field-error" *ngIf="ctlLastName.hasError('minlength')">Minimum length is {{ctlLastName.errors['minlength'].requiredLength}}</mat-error>
+            <mat-error class="field-error" *ngIf="ctlLastName.hasError('maxlength')">Maximum length is {{ctlLastName.errors['maxlength'].requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" [formControl]="ctlEmail">
+            <mat-error class="field-error" *ngIf="ctlEmail.hasError('required')">Required</mat-error>
+            <mat-error class="field-error" *ngIf="ctlEmail.hasError('emailUsed')">Email already in use</mat-error>
+            <mat-error class="field-error" *ngIf="ctlEmail.hasError('invalidEmail')">Invalid email</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Password" [formControl]="ctlPassword" type="password" required>
+            <mat-error class="field-error" *ngIf="ctlPassword.hasError('required')">Required</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPassword.hasError('minlength')">Minimum length is {{ctlPassword.errors['minlength'].requiredLength}}</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPassword.hasError('maxlength')">Maximum length is {{ctlPassword.errors['maxlength'].requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Confirm password" [formControl]="ctlPasswordConfirm" type="password" required>
+            <mat-error class="field-error" *ngIf="ctlPassword.hasError('required')">Required</mat-error>
+            <mat-error class="field-error" *ngIf="ctlPassword.hasError('mismatchPassword')">Password does not match</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Birth Date" [formControl]="ctlBirthDate" type="date">
+            <mat-error class="field-error" *ngIf="ctlBirthDate.hasError('tooYoung')">Must be at least 18 years old</mat-error>
+            <mat-error class="field-error" *ngIf="ctlBirthDate.hasError('futureBorn')">Can't be born in the future</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="footer">
+        <button type="submit" mat-button form="frm" [disabled]="frm.pristine || frm.invalid || frm.pending" (click)="AddUser()">Subscribe</button>
+        <button type="reset" mat-button (click)="cancel()">Cancel</button>
+    </div>
+</form>
+<!--
+<pre>
+{{frm.value | json }}
+{{frm.invalid | json }}
+{{frm.pristine | json }}
+{{frm.pending | json }}
+</pre>
+-->

@@ -1,0 +1,65 @@
+<div class="row">
+    <div *ngFor="let tag of tags">
+        <div class="col-sm-1" *ngIf="tags">
+            <div class="badge badge-primary"> {{tag.name}} </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12" *ngIf="question">
+        <h1>{{question.title}}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12" *ngIf="question">
+        <app-post [question]="question" [post]="question"></app-post>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12" *ngIf="acceptedAnswer">
+        <h3>Accepted Answer</h3>
+        <app-post [question]="question" [post]="acceptedAnswer"></app-post>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <mat-form-field>
+            <input matInput (keyup)="filterChanged($event.target.value)" [value]="filter" placeholder="Filter" appSetFocus>
+        </mat-form-field>
+
+        <div class="mat-elevation-z2">
+            <table mat-table [dataSource]="dataSource" matSort matSortDisableClear>
+                <ng-container matColumnDef="content">
+                    <th math-header-cell *matHeaderCellDef class="table-title">Answers</th>
+                    <td mat-cell *matCellDef="let row">
+                        <app-post [question]="question" [post]="row"></app-post>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="authService && authService.currentUser">
+    <div class="col-sm-12">
+        <h3>Your Answer</h3>
+        <form id="frm" class="form" [formGroup]="frm" novalidate #formDirective="ngForm">
+            <!--<mat-form-field>
+                <input matInput placeholder="Body" [formControl]="ctlBody" value="{{ctlBody.value}}" required>
+                <mat-error class="field-error" *ngIf="ctlBody.hasError('required')">Required</mat-error>
+            </mat-form-field>-->
+            <div class="mt-2">
+                <button type="submit" mat-raised-button form="frm"
+                    [disabled]="frm.pristine || frm.invalid || frm.pending" (click)="post()">Post</button>
+            </div>
+            <simplemde  [formControl]="ctlBody" required></simplemde>
+        </form>
+    </div>
+</div>

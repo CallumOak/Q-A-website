@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>New question</h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <form id="frm" class="form" [formGroup]="frm" novalidate #formDirective="ngForm">
+            <mat-form-field>
+                <input matInput placeholder="Title" [formControl]="ctlTitle">
+            </mat-form-field>
+            <simplemde  [formControl]="ctlBody" required></simplemde>
+            <label formArrayName="tags" *ngFor="let order of frm.controls.tags.controls; let i = index">
+                <input type="checkbox" [formControlName]="i" />
+                {{tagsList[i].name}}
+            </label>
+            <div class="mt-2">
+                <button type="submit" mat-raised-button form="frm"
+                    [disabled]="frm.pristine || frm.invalid || frm.pending" (click)="post(formDirective)">Post</button>
+            </div>
+        </form>
+    </div>
+</div>

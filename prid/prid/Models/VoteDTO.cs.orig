@@ -1,0 +1,16 @@
+using System;
+
+namespace prid.Models {
+
+    public class VoteDTO {
+<<<<<<< HEAD
+    }
+}
+=======
+        public int AuthorId {get; set;}
+        public int PostId {get; set;}
+        public int UpDown {get; set;}
+
+    }
+}
+>>>>>>> dev

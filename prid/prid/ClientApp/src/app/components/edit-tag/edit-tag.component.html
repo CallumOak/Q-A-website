@@ -1,0 +1,15 @@
+<form id="frm" class="form" [formGroup]="frm" novalidate>
+    <h1 class="header">{{(!isNew ? 'Edit existing' : 'Add a new') + ' tag'}}</h1>
+    <div class="form">
+        <mat-form-field>
+            <input matInput placeholder="Name" [formControl]="ctlName" required>
+            <mat-error class="field-error" *ngIf="ctlName.hasError('required')">Required</mat-error>
+            <mat-error class="field-error" *ngIf="ctlName.hasError('tagNameUsed')">Name already in use</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="footer">
+        <button type="submit" mat-button form="frm" [disabled]="frm.pristine || frm.invalid || frm.pending"
+            (click)="update()">{{!isNew ? 'Update' : 'Add'}}</button>
+        <button type="reset" mat-button (click)="cancel()">Cancel</button>
+    </div>
+</form>

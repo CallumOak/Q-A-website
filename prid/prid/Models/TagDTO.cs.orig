@@ -1,0 +1,17 @@
+using System;
+<<<<<<< HEAD
+=======
+using System.Collections.Generic;
+>>>>>>> dev
+
+namespace prid.Models {
+
+    public class TagDTO {
+<<<<<<< HEAD
+=======
+        public int Id {get; set;}
+        public string Name {get; set;}
+        public IList<int> PostIds {get; set;}
+>>>>>>> dev
+    }
+}

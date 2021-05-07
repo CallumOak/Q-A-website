@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row post-container">
+        <div class="col-1">
+            <button mat-icon-button tabindex="-1" [disabled]="!canUpvote">
+                <mat-icon (click)="!canUpvote || upvote()">keyboard_arrow_up</mat-icon>
+            </button>
+            <div class="col">
+                <h3>
+                    {{post.score}}
+                </h3>
+            </div>
+            <button mat-icon-button tabindex="-1" [disabled]="!canDownvote">
+                <mat-icon (click)="!canDownvote || downvote()">keyboard_arrow_down</mat-icon>
+            </button>
+        </div>
+        <div class="col-11">
+            <div class="row">
+                <markdown [data]="post.body" ngPreserveWhitespaces>
+                </markdown>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-button-toggle-group multiple (change)="toggleChange($event)" #editorGroup="matButtonToggleGroup">
+                        <mat-button-toggle value="edit" *ngIf="canEdit()">
+                            <mat-icon>edit</mat-icon>
+                        </mat-button-toggle>
+                        <mat-button-toggle value="comment" *ngIf="authService && authService.currentUser">
+                            <mat-icon>question_answer</mat-icon>
+                        </mat-button-toggle>                    
+                    </mat-button-toggle-group>
+                </div>
+                <div class="col-2">
+                    <button mat-icon-button tabindex="-1" *ngIf="canSelectAnswer()">
+                        <mat-icon (click)="selectAnswer()">check</mat-icon>
+                    </button>
+                    <button mat-icon-button tabindex="-1" *ngIf="canUnselectAnswer()">
+                        <mat-icon (click)="unselectAnswer()">close</mat-icon>
+                    </button>
+                </div>
+                <div class="col-3">
+                    {{post.timestamp | date:'dd/MM/yyyy HH:mm:ss'}}
+                </div>
+                <div class="col-3" *ngIf="post.author">
+                    {{post.author.pseudo}} ({{post.author.reputation}})
+                </div>
+                <div class="col-1">
+                    <button mat-icon-button tabindex="-1" *ngIf="canDelete()">
+                        <mat-icon (click)="delete()">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form id="frm" class="form" [formGroup]="frm" novalidate #formDirective="ngForm" *ngIf="isFrmVisible">
+                        <!--<mat-form-field>
+                            <input matInput placeholder="Body" [formControl]="ctlBody" value="{{ctlBody.value}}" required>
+                            <mat-error class="field-error" *ngIf="ctlBody.hasError('required')">Required</mat-error>
+                        </mat-form-field>-->
+                        <div class="mt-2">
+                            <button type="submit" mat-raised-button form="frm"
+                                [disabled]="frm.pristine || frm.invalid || frm.pending" (click)="editor_submit()">Post</button>
+                        </div>
+                        <simplemde [formControl]="ctlBody" required></simplemde>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" *ngIf="isNotEmpty()">
+                    <app-comments #comments [post]="post"></app-comments>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

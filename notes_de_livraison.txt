@@ -1,0 +1,32 @@
+auteurs : Oakey Callum, Abeloos Damien
+groupe : PRID5853-G04
+
+installation de l'application :
+    dossier /prid/prid
+        dotnet ef database update
+        dotnet watch run
+    dossier /prid/prid/ClientApp
+        npm install
+        npm start
+
+pour donner de la reputation a un utilisateur : 
+    se connecter en tant que
+        admin
+        admin
+    aller dans l'onglet utilisateurs
+    editer un utilisateur
+    ajouter de la reputation
+
+pour acceder au detail d'une question et aux reponses :
+    aller a l'url : localhost:5000/questions
+    cliquer sur une des lignes (cela va rediriger vers l'url de la question)
+
+lors des manipulations aux urls suivantes : localhost:5000/question/{nombre_entier}
+    -> bien attendre le rechargement complet de la page avant chaque action, 
+        il se peut que rien ne se passe si on clique trop tot
+    -> les filtres portent sur le contenu des posts/commentaires
+
+Il n'est pas possible d'editer le titre et les tags d'une question une fois creee
+    -> on peut seulement editer son body
+
+pas de confirmation delete comment/post

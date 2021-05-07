@@ -1,0 +1,51 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <div class="container">
+      <a class="navbar-brand" [routerLink]='["/"]'>prid5853-g04</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex" [ngClass]='{"show": isExpanded}'>
+        <ul class="navbar-nav flex-grow mr-auto">
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/questions"]'>Questions</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/tags"]'>Tags</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="currentUser && isAdmin">
+            <a class="nav-link text-dark" [routerLink]='["/users"]'>Users</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="currentUser">
+            <a class="nav-link text-dark" [routerLink]='["/new"]'>New question</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!currentUser">
+            <a class="nav-link text-dark" [routerLink]='["/login"]'>
+              <span class="material-icons">exit_to_app</span>
+              <span> Login </span>
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="currentUser">
+            <a class="nav-link text-dark" [routerLink]='' (click)='logout()'>
+              <span class="material-icons">power_settings_new</span>
+              <span> Logout </span>
+              <span class="text-info"> {{currentUser.pseudo}} ({{currentUser.reputation}})</span>
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!currentUser">
+            <a class="nav-link text-dark" [routerLink]='["/signup"]'>
+              <span class="material-icons">person_add</span>
+              <span> Signup </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

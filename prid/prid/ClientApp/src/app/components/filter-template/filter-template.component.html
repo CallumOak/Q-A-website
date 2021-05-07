@@ -1,0 +1,27 @@
+<span #filterMenu="matMenuTrigger" [matMenuTriggerFor]="menu" id="filter-panel">
+
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+     <div (click)="$event.stopPropagation()" (keyup)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+       <form autocomplete="off"  (ngSubmit)="onFilterSubmit()" [formGroup]="filterForm">
+                
+        <mat-form-field  style="width: auto;">
+        <mat-select formControlName="op" placeholder="Condition:">
+            <mat-option *ngFor="let con of conditions" [value]="condi.id">
+                 {{con.text}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+                    
+        <mat-form-field  *ngIf="!forFirstValue">
+            <input formControlName="val1" matInput placeholder="Value">
+        </mat-form-field>
+    
+        <mat-form-field class="font-sm" *ngIf="forSecondValue">
+           <input formControlName="val2" matInput placeholder="Second Value">
+        </mat-form-field>
+                    
+        <button [disabled]="hasNoValue" matRipple type="submit"></button>                
+        </form>
+      </div>
+     </mat-menu>
+    </span>

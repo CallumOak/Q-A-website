@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "fbe1e7e9-f3d8-4762-9f92-db462b96a213",
+		"name": "put",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:5000/api/posts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwibmJmIjoxNTc5ODIyODkwLCJleHAiOjE1ODU4MjI4OTAsImlhdCI6MTU3OTgyMjg5MH0.7iORkNliEvnEgdWnEO88oRTt4kyCZsFyMOhZ05cVf5M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":4,\"title\":\"How do I escape characters in an Angular date pipe?\",\"body\":\"THIS IS A MODIFICATION\",\"timestamp\":\"2020-01-24T01:28:24.428254\",\"authorId\":1,\"parentId\":null,\"acceptedAnswerId\":5,\"commentIds\":[],\"childIds\":[5,6,7],\"voteIds\":[],\"tagIds\":[2],\"commentsCount\":0,\"tags\":[{\"id\":2,\"name\":\"typescript\",\"posts\":1}],\"childsCount\":2,\"score\":0,\"author\":{\"id\":1,\"pseudo\":\"ben\",\"email\":\"ben@test.com\",\"lastName\":\"Penelle\",\"firstName\":\"Benoît\",\"password\":null,\"birthDate\":null,\"role\":0,\"reputation\":0},\"authorPseudo\":\"ben\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/posts/4",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"posts",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

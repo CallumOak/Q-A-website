@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Questions</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h3>I found the following questions :</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <mat-form-field>
+            <input matInput (keyup)="filterChanged($event.target.value)" [value]="filter" placeholder="Filter"
+                appSetFocus>
+        </mat-form-field>
+        <mat-form-field> 
+            <mat-select placeholder="Select tag" name="selectedTag" (selectionChange)="redirectToFilteredByTag(selectedTag)" [(ngModel)]="selectedTag">
+                    <mat-option [value]=null> <!--  -->
+                            all
+                    </mat-option>
+                    <mat-option *ngFor="let tag of tags" [value]="tag.id"> <!--  -->
+                            {{tag.name}}
+                    </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="mat-elevation-z2">
+            <table mat-table [dataSource]="dataSource" matSort matSortDisableClear>
+                <ng-container matColumnDef="score">
+                    <th class="col-1" mat-header-cell *matHeaderCellDef>
+                           <span mat-sort-header>Score </span>
+                        </th>
+                    <td mat-cell *matCellDef="let row">{{row.score}}</td>
+                </ng-container>
+                <ng-container matColumnDef="childrenCount">
+                    <th class="col-1" mat-header-cell *matHeaderCellDef>
+                           <span mat-sort-header>Answers </span>
+                    </th >
+                    <td mat-cell *matCellDef="let row">{{row.childrenCount}}</td >
+                </ng-container>
+                <ng-container matColumnDef="title">
+                    <th class="col-5" mat-header-cell *matHeaderCellDef>
+                           <span mat-sort-header>Title </span>
+                    </th >
+                    <td mat-cell *matCellDef="let row">{{row.title}}</td >
+                </ng-container>
+                <ng-container matColumnDef="authorPseudo">
+                    <th class="col-2" mat-header-cell *matHeaderCellDef>
+                           <span mat-sort-header>Author </span>
+                           
+                    </th >
+                    <td mat-cell *matCellDef="let row">{{row.author.pseudo}}</td >
+                </ng-container>
+                <ng-container matColumnDef="tagIds">
+                    <th class="col-2" mat-header-cell *matHeaderCellDef>
+                           <span mat-sort-header>Tag </span>
+                    </th >
+                    <td mat-cell *matCellDef="let row">{{row.tagNames}}</td >
+                </ng-container>
+                <ng-container matColumnDef="timestamp">
+                    <th class="col-1" mat-header-cell *matHeaderCellDef>
+                           <span mat-sort-header>Date </span>
+                    </th >
+                    <td mat-cell *matCellDef="let row">{{row.timestamp}}</td >
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr class="clickable" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="redirectToQuestion(row.id)">
+                </tr>
+            </table>
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 25, 100]"></mat-paginator>
+        </div>
+    </div>
+</div>
